@@ -7,47 +7,45 @@
 
 ### THEME ###
 
-set $border      #A87AAE
-set $darkborder  #644968
+set $black       #2c2836
+set $darkblack   #73707e
+set $red         #bb7473
+set $darkred     #cf9fa4
+set $green       #68b782
+set $darkgreen   #9acbad
+set $yellow      #abb773
+set $darkyellow  #c5cba4
+set $blue        #7865c5
+set $darkblue    #a396d9
+set $magenta     #bb65b6
+set $darkmagenta #cf96cf
+set $cyan        #68a8c5
+set $darkcyan    #9ac1d9
+set $white       #f1edfb
+set $darkwhite   #f1edfb
+set $background  #133B47
+
+set $border      #aea87a
+set $darkborder  #688f5d
 set $warnborder  #ee6949
 
-set $base00 #090300
-set $base01 #3a3432
-set $base02 #4a4543
-set $base03 #5c5855
-set $base04 #807d7c
-set $base05 #a5a2a2
-set $base06 #d6d5d4
-set $base07 #f7f7f7
-set $base08 #db2d20
-set $base09 #e8bbd0
-set $base0A #fded02
-set $base0B #01a252
-set $base0C #b5e4f4
-set $base0D #01a0e4
-set $base0E #a16a94
-set $base0F #cdab53
+#Colors                 BORDER       BACKGROUND   TEXT   INDICATOR
+client.focused          $border      $border      $darkblue $border
+client.unfocused        $darkborder  $darkborder  $darkblue $darkborder
+client.focused_inactive $darkborder  $darkborder  $darkblue $darkborder
+client.urgent           $warnborder  $warnborder  $darkblue $warnborder
 
-
-# Basic color configuration using the Base16 variables for windows and borders.
-# Property Name         Border  BG      Text    Indicator Child Border
-client.focused          $base05 $base0D $base00 $base0D $base0D
-client.focused_inactive $base01 $base01 $base05 $base03 $base01
-client.unfocused        $base01 $base00 $base05 $base01 $base01
-client.urgent           $base08 $base08 $base00 $base08 $base08
-client.placeholder      $base00 $base00 $base05 $base00 $base00
-client.background       $base07
 
 
 ### Borders ###
-new_window pixel 0
-new_float pixel 0
+new_window pixel 1
+new_float pixel 1
 
 focus_follows_mouse no
 
 ### Gaps ###
-set $default_gaps_inner 20
-set $default_gaps_outer 20
+set $default_gaps_inner 10
+set $default_gaps_outer 10
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
 
@@ -60,7 +58,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:terminus 12px
+font pango:monospace 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -77,16 +75,13 @@ font pango:terminus 12px
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start rofi with color config file
-bindsym $mod+d exec rofi -config ~/.config/rofi/rofi.config -show run -width 250
-
-# scrot into Pictures
-bindsym Print exec scrot 'Screenshot - %Y-%m-%d--%_$wx$h_scrot.png' -e 'mv $f ~/images/'
+bindsym $mod+d exec rofi -config ~/.config/rofi/rofi.config -show run -lines 3  -opacity "80" -location 0 -width 250
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -144,16 +139,16 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # set workspace names
-set $workspace1 "1 "
-set $workspace2 "2 "
-set $workspace3 "3 "
-set $workspace4 "4 "
-set $workspace5 "1 "
-set $workspace6 "2 "
-set $workspace7 "3 "
-set $workspace8 "4 "
-set $workspace9 "9  "
-set $workspace10 "10  "
+set $workspace1 "1. "
+set $workspace2 "2. "
+set $workspace3 "3. "
+set $workspace4 "4. "
+set $workspace5 "1. "
+set $workspace6 "2. "
+set $workspace7 "3. "
+set $workspace8 "4. "
+set $workspace9 "9."
+set $workspace10 "10."
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -215,24 +210,26 @@ bindsym $mod+r mode "resize"
 # Floating classes
 
 for_window [class="Gimp"] floating enable
-for_window [class="PacketTracer7"] floating enable
-for_window [class="PuyoVS"] floating enable
 
 # Tiling classes
 for_window [class="ffplay"] floating disable
 
+# Printscreen
+bindsym Print exec gnome-screenshot -c
+bindsym Mod1+Print exec gnome-screenshot -w -c
+
 # Bind workspaces to monitors
 
-workspace $workspace1 output DVI-0
-workspace $workspace2 output DVI-0
-workspace $workspace3 output DVI-0
-workspace $workspace4 output DVI-0
-workspace $workspace5 output DVI-1
-workspace $workspace6 output DVI-1
-workspace $workspace7 output DVI-1
-workspace $workspace8 output DVI-1
-workspace $workspace9 output DVI-1
-workspace $workspace10 output DVI-1
+workspace $workspace1 output DVI-I-0
+workspace $workspace2 output DVI-I-0
+workspace $workspace3 output DVI-I-0
+workspace $workspace4 output DVI-I-0
+workspace $workspace5 output DVI-D-1
+workspace $workspace6 output DVI-D-1
+workspace $workspace7 output DVI-D-1
+workspace $workspace8 output DVI-D-1
+workspace $workspace9 output DVI-D-1
+workspace $workspace10 output DVI-D-1
 
 # Assigning programs to workspaces
 
@@ -242,13 +239,8 @@ assign [class="Spotify"] $workspace8
 assign [class="Steam"] $workspace4
 assign [class="Wine"] $workspace3
 assign [class="Thunderbird"] $workspace7
-assign [class="RocketLeague"] $workspace3
+assign [class="Rocket League"] $workspace3
 assign [class="Civ5XP"] $workspace3
-assign [class="ffxiv.exe"] $workspace3
-assign [class="lisa.x86_64"] $workspace3
-assign [class="necrodancer"] $workspace3
-assign [class="Poly Bridge"] $workspace3
-assign [class="Factorio 0.15.28"] $workspace3
 
 # Lockscreen bind
 bindsym $mod+Scroll_Lock exec i3lock -i /home/morgie/Pictures/Utena/4Dk4ckk3kSsTRFbqhBR59HT5QRf.png -t
@@ -258,25 +250,20 @@ bindsym $mod+Scroll_Lock exec i3lock -i /home/morgie/Pictures/Utena/4Dk4ckk3kSsT
 bar {
         i3bar_command i3bar -t
 	position 	top
-        status_command i3blocks -c ~/.i3/i3blocks.conf
+        status_command i3blocks
         tray_output primary
-
-## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-	tray_output DVI-0
-
 	height 22
 	    colors {
-		background $base00AA
-		separator  $base01
-        statusline $base04
+        statusline #E9F2F9
+        background #133B47dd
+	separator #68b782aa
 	
 
-        # State             Border  BG      Text
-        focused_workspace   $base05 $base0D $base00
-        active_workspace    $base05 $base03 $base00
-        inactive_workspace  $base03 $base01 $base05
-        urgent_workspace    $base08 $base08 $base00
-        binding_mode        $base00 $base0A $base00
+        # Type                     border     background    text
+        focused_workspace         #fffff000     #68b782aa       #1b325F
+        active_workspace          #fffff000     #68b782aa	#1b325F
+        inactive_workspace        #fffff000     #9acbadaa       #1b325F
+        urgent_workspace          #ffffff00     #F26C4Faa       #1b325F
 
     }
 
@@ -287,11 +274,5 @@ bar {
 # Exec on boot #
 
 exec --no-startup-id compton --config ~/.config/compton.conf
-exec --no-startup-id feh --bg-scale /home/morgie/Pictures/hex.png
-exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
-exec --no-startup-id parcellite
-exec --no-startup-id discord
-exec --no-startup-id thunderbird
-exec --no-startup-id dropbox
+exec --no-startup-id xfce4-clipman
+exec --no-startup-id feh --bg-fill /home/morgie/Pictures/Utena/utena-at-stairs.jpg

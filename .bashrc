@@ -45,6 +45,9 @@ if [ -f ~/.bash_functions ]; then
 . ~/.bash_functions
 fi
 
+# env variables #
+export EDITOR=/bin/vim
+
 # Here Be Moogle ASCIIs
 
 RED='\033[0;31m'	# Sets red color
@@ -63,3 +66,9 @@ echo -e "${VIOLET}Welcome to Morgie's Nightmare Hellterminal!"
 
 # Set terminal colors for commands
 PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h:\[\033[1;35m\]\w\[\033[1;31m\]\$\[\033[0m\] '
+
+PATH="/home/morgie/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/morgie/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/morgie/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/morgie/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/morgie/perl5"; export PERL_MM_OPT;
